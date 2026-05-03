@@ -1,58 +1,63 @@
 .page {
-  background-color: var(--bg-color);
-  background-image: var(--bg-image);
+  /* 1. Позиционирование и размеры */
+  margin: 0;
+  min-height: 100vh;
+  inline-size: 100%;
+  overflow-x: hidden;
+
+  /* 2. Сетка для контента */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  /* 3. Оформление фона */
+  background-color: var(--bg-color, #000028);
+  background-image: var(--bg-img, url(/images/cover-image-dark.png));
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  min-height: 100vh;
-  margin: 0;
-  font-family: sans-serif;
-  overflow-x: hidden;
+
+  /* 4. Типографика */
+  color: var(--text-color, #F1B2CE);
+  font-family: var( 'IBM Plex mono', monospace);
+  font-size: 18px;
+  line-height: 1.3;
 }
 
 .header {
   display: grid;
-  grid-template-rows: auto 1fr auto auto; 
-  align-content: center;
+  grid-template-rows: auto 1fr 1fr 1fr auto;
   position: relative;
-  padding: 10px;
+  block-size: clamp(668px, 100vh, 41.75rem);
+  padding: 0 10px;
   box-sizing: border-box;
-  height: 100vh;
-  min-height: 668px;
 }
 
 .header__rec {
   position: absolute;
   top: 10px;
-  right: 15px;
-  margin: 0;
-  text-transform: uppercase;
-  color: #FF0070;
-  font-family: IBM Plex Mono, monospace;
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 0%;
-  text-align: center;
+  right: 15px; /* Удобно регулировать отступ от угла */
   display: flex;
+  align-items: center; /* Центрируем кружок по вертикали текста */
+  gap: 10px; /* Современный способ сделать отступ между текстом и кружком */
+  
+  color: var(--accent-color, #FF0070);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  text-transform: uppercase;
+  line-height: 1.3;
 }
 
 .header__rec::after {
   content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  background-color: #FF0070; /* Или цвет, соответствующий вашей теме */
+  inline-size: 9px; /* Чуть меньше — выглядит аккуратнее */
+  block-size: 9px;
+  background-color: currentColor; /* Автоматически берет цвет текста */
   border-radius: 50%;
-  margin-left: 10px;
-  box-shadow: 0 0 10px 2px #FF0070;
+  box-shadow: 0 0 4px 2px var(--accent-color, #FF0070); /* Аккуратное свечение */
 }
 
-.decorated-zone {
-  position: relative;
-}
 
 .decorated-zone::before,
 .decorated-zone::after {
@@ -65,145 +70,125 @@
 .decorated-zone::before {
   top: 10px;
   right: 10px;
-  border-top: 1px solid #FF0070;
-  border-right: 1px solid #FF0070;
+  
+  /* Размеры уголка */
+
+  
+  /* Рисуем только верх и право */
+  border-block-start: 1px solid var(--accent-color, #FF0070);
+  border-inline-end: 1px solid var(--accent-color, #FF0070);
 }
 
 .decorated-zone::after {
-  bottom: 20px;
+  /* Прижимаем к нижнему левому углу */
+  bottom: 10px;
   left: 10px;
-  border-bottom: 1px solid #FF0070;
-  border-left: 1px solid #FF0070;
+
+  /* Размеры сторон уголка */
+
+  /* Рисуем нижнюю и левую границы */
+  border-block-end: 1px solid var(--accent-color, #FF0070);
+  border-inline-start: 1px solid var(--accent-color, #FF0070);
 }
 
 .header__theme-menu {
-  font-family: IBM Plex Mono, monospace;
-  font-weight: 400;
-  font-style: Regular;
+  /* Позиционирование в сетке шапки */
+  justify-self: end; /* Прижать к правому краю */
+  align-self: start; /* Или center, зависит от дизайна */
+  
+  /* Внешний вид текста */
+  font-family: var(--fonts, 'IBM Plex Mono', monospace);
   font-size: 18px;
-  line-height: 18px;
-  letter-spacing: 0%;
+  line-height: 1; /* Для меню лучше 1 или 1.1, чтобы кнопки были компактнее */
   text-align: center;
-  justify-self: end;
-  align-self: center;
+  
+  /* Отступ сверху, чтобы не прилипало к краю экрана */
+  padding-block-start: 75px; 
 }
 
 .header__theme-menu-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px; /* Чуть аккуратнее */
   margin: 0;
   padding: 0;
+  list-style: none; /* ОБЯЗАТЕЛЬНО: убирает маркеры-точки у списка */
 }
 
 .header__theme-menu-button {
-  background-color: transparent;
-  outline: none;
+  background: transparent;
+  /* 1. Сразу задаем прозрачный border, чтобы текст не прыгал при фокусе */
   border: none;
+  border-bottom: 1px solid transparent; 
+  /* 2. Единый padding для всех состояний */
+  padding: 2px 13px; 
+  cursor: pointer;
+
+  color: var(--accent-color, #FF0070);
+  font-family: inherit;
+  font-size: 18px;
   text-transform: lowercase;
-  color: #FF0070;
+  
+  /* 3. Убираем лишние transition, оставляем только нужные */
+  transition: outline 0.3s ease;
+  
+  outline: 1px solid transparent;
+  outline-offset: 0;
 }
 
+.header__theme-menu-button:hover {
+  /* Используем переменную для ховера */
+  outline: 1px solid var(--button-hover, #FF007066);
+}
+
+/* Объединяем disabled и active, чтобы не дублировать код */
+.header__theme-menu-button:disabled,
 .header__theme-menu-button_active {
-  outline: 1px solid #FF0070;
-  padding: 2px 13px;
-} 
+  outline: 1px solid var(--accent-color, #FF0070);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.header__theme-menu-button:focus-visible {
+  outline: none;
+  /* 4. Теперь border просто меняет цвет с прозрачного на розовый, не двигая текст */
+  border-bottom: 1px solid var(--accent-color, #FF0070);
+}
+
 
 
 .header__title {
-  font-family: IBM Plex Mono, monospace;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
-  line-height: 83%;
-  letter-spacing: 0%;
-  color: #DB00FF;
-  text-shadow: 4px 4px 0 var(--accent-color);
+  /* Позиционирование: во втором ряду, прижат к низу */
   grid-row: 2;
   align-self: end;
+  margin: 0; /* Обнуляем лишние отступы заголовка */
+  margin-block-start: 65px;
+  /* Типографика */
+  color: var(--title-color, #DB00FF);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  /* Использование clamp — это супер, оставляем его */
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  line-height: 0.825;
+
+  /* Декоративный эффект */
+  text-shadow: 4px 4px 0 var(--accent-color, #FF0070);
 }
 
-.title-decor {
-  background-color: var(--accent-color);
-  height: 115px;
-  max-width: 355px;
-  margin-top: 20px;
-  grid-row: 4;
-  align-self: start;
+.subtitle-decor {
+  align-self: center;
+  padding-block-start: 55px;
 }
 
 .header__subtitle {
-  font-family: IBM Plex Mono, monospace;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 18px;
-  line-height: 23.4px;
-  letter-spacing: 0%;
-  color: black;
+  background-color: var(--accent-color, #FF0070);
+  color: var(--title-decor-text-color, #000028);
+font-family: IBM Plex Mono, monospace;
+font-weight: 700;
+font-style: Bold;
+font-size: 18px;
+leading-trim: NONE;
+line-height: 23.4px;
+letter-spacing: 0%;
+
 }
-
-
-@media (min-width: 768px) {
-  .header {
-    grid-template-rows: 70px 1fr 1fr 60px 1fr 20px; 
-    padding: 20px;
-    padding-left: 0;
-  }
-
-  .header__theme-menu {
-    grid-row: 2;
-  }
-
-  .header__title {
-    align-self: center;
-    grid-row: 3;
-  }
-
-  .title-decor {
-    grid-row: 5;
-    justify-self: end;
-  }
-}
-
-@media (min-width: 1024px) {
-
-  .header{
-    padding: 20px;
-    padding-left: 0;
-    grid-template-columns: 20px 1fr;
-    grid-template-rows: 1fr 1fr 100px 1fr
-  }
-
-  .header__theme-menu-list {
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  .header__theme-menu{
-    justify-self: center;
-    align-self: start;    
-    grid-column: 2;
-  }
-
-  .header__title {
-    grid-column: 1/3;
-    font-family: IBM Plex Mono;
-    font-weight: 700;
-    font-style: Bold;
-    font-size: 157px;
-    line-height: 83%;
-    letter-spacing: 0%;
-  }
-
-  .title-decor {
-    grid-column: 2;
-    height: 70px;
-    max-width: 490px;
-    justify-self: end;
-  }
-}
-
-
-
-
-
