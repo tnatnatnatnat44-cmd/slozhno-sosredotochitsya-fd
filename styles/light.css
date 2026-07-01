@@ -6,5 +6,13 @@
 
 :root.theme-light {
   --bg-color: #fef1f9;
-  --bg-image: url('../images/cover-image-light.png');
+  --bg-image: url(../images/cover-image-light.png);
+  --accent-color: #FF8DCB;
+  --menu-decor-color: #353430;
+  --title-color-section: #353430;
+  --text-color: #353430;
+  --title-color: #FFC2E6;
+  --title-decor-text-color: #000028;
+  --fonts: 'IBM Plex mono';
+  --display-circle: none;
 }
