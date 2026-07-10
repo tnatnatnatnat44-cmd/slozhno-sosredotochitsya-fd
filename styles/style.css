@@ -166,8 +166,7 @@ main {
   gap: 15px;
 }
 
-.reason-card,
-.factor-card {
+.card {
   display: grid;
   gap: 10px;
 }
@@ -439,7 +438,7 @@ main {
     gap: 80px;
   }
 
-  .title-what {
+  .section-what .concentration-guide__title{
     padding-right: 700px;
   }
 
