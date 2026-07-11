@@ -35,7 +35,7 @@
   align-items: center;
   gap: 10px;
   color: var(--menu-decor-color);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--fonts);
   font-size: 18px;
   text-transform: uppercase;
   line-height: 1.3;
