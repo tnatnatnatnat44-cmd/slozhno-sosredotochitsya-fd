@@ -17,3 +17,19 @@
   --button-hover: #32312D66;
   --link-hover: #353430;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #fef1f9;
+    --bg-image: url(../images/cover-image-light.png);
+    --accent-color: #FF8DCB;
+    --menu-decor-color: #353430;
+    --title-color-section: #353430;
+    --text-color: #353430;
+    --title-color: #FFC2E6;
+    --title-decor-text-color: #353430;
+    --display-circle: none;
+    --button-hover: #323112D6;
+    --link-hover: #353430;
+  }
+}
