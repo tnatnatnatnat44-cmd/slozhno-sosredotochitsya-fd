@@ -142,7 +142,7 @@
 
 .header__subtitle {
   background-color: var(--accent-color);
-  color: var(--subtitle-color);
+  color: var(--title-decor-text-color);
   font-family: var(--fonts);
   font-weight: 700;
   font-size: 18px;
@@ -233,7 +233,7 @@ main {
 }
 
 .link:focus-visible {
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--link-hover);
   display: inline-block;
 }
 
@@ -408,7 +408,7 @@ main {
   .header {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-    height: min(100vh, 768px);
+    height: max(100vh, 768px);
   }
 
   .header__theme-menu-list {

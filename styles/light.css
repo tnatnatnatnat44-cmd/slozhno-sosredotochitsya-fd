@@ -12,6 +12,8 @@
   --title-color-section: #353430;
   --text-color: #353430;
   --title-color: #FFC2E6;
-  --title-decor-text-color: #000028;
+  --title-decor-text-color: #353430;
   --display-circle: none;
+  --button-hover: #32312D66;
+  --link-hover: #353430;
 }
